@@ -3,7 +3,11 @@ import { celebrate } from 'celebrate';
 import { getNoteById, getAllNotes, createNote, deleteNote, updateNote } from '../controllers/notesController.js';
 import {getAllNotesSchema, noteIdSchema, createNoteSchema, updateNoteSchema} from '../validations/notesValidation.js';
 
+import { authenticate } from "../middleware/authenticate.js";
+
 const router = Router();
+
+router.use("/notes", authenticate);
 
 router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
 
